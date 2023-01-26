@@ -1,6 +1,6 @@
-[![Build Status](https://github.com/dart-lang/logging/workflows/Dart%20CI/badge.svg)](https://github.com/dart-lang/logging/actions?query=workflow%3A"Dart+CI"+branch%3Amaster)
-[![Pub](https://img.shields.io/pub/v/logging.svg)](https://pub.dev/packages/logging)
-[![package publisher](https://img.shields.io/pub/publisher/logging.svg)](https://pub.dev/packages/logging/publisher)
+# Disclaimer
+
+This is a fork of <https://github.com/dart-lang/logging>.
 
 ## Initializing
 
@@ -11,7 +11,7 @@ messages.
 Here is a simple logging configuration that logs all messages via `print`.
 
 ```dart
-Logger.root.level = Level.ALL; // defaults to Level.INFO
+Logger.root.level = Level.trace; // defaults to Level.info
 Logger.root.onRecord.listen((record) {
   print('${record.level.name}: ${record.time}: ${record.message}');
 });
@@ -20,15 +20,13 @@ Logger.root.onRecord.listen((record) {
 First, set the root `Level`. All messages at or above the current level are sent to the
 `onRecord` stream. Available levels are:
 
-+ `Level.OFF`
-+ `Level.SHOUT`
-+ `Level.SEVERE`
-+ `Level.WARNING`
-+ `Level.INFO`
-+ `Level.CONFIG`
-+ `Level.FINE`
-+ `Level.FINER`
-+ `Level.FINEST`
++ `Level.off`
++ `Level.wtf`
++ `Level.error`
++ `Level.warn`
++ `Level.info`
++ `Level.debug`
++ `Level.trace`
 
 Then, listen on the `onRecord` stream for `LogRecord` events. The `LogRecord`
 class has various properties for the message, error, logger name, and more.
@@ -60,11 +58,9 @@ log.fine(() => [1, 2, 3, 4, 5].map((e) => e * 4).join("-"));
 
 Available logging methods are:
 
-+ `log.shout(logged_content);`
-+ `log.severe(logged_content);`
-+ `log.warning(logged_content);`
-+ `log.info(logged_content);`
-+ `log.config(logged_content);`
-+ `log.fine(logged_content);`
-+ `log.finer(logged_content);`
-+ `log.finest(logged_content);`
++ `log.wtf(logged_content);`
++ `log.e(logged_content);`
++ `log.w(logged_content);`
++ `log.i(logged_content);`
++ `log.d(logged_content);`
++ `log.v(logged_content);`

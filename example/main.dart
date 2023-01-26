@@ -1,4 +1,4 @@
-import 'package:logging/logging.dart';
+import 'package:dlog/dlog.dart';
 
 final log = Logger('ExampleLogger');
 
@@ -10,17 +10,17 @@ final log = Logger('ExampleLogger');
 /// INFO: 2021-09-13 15:35:10.707974: recursion: n = 3
 /// Fibonacci(4) is: 3
 /// Fibonacci(5) is: 5
-/// SHOUT: 2021-09-13 15:35:10.708087: Unexpected negative n: -42
+/// off: 2021-09-13 15:35:10.708087: Unexpected negative n: -42
 /// Fibonacci(-42) is: 1
 void main() {
-  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.level = Level.trace; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     print('${record.level.name}: ${record.time}: ${record.message}');
   });
 
   print('Fibonacci(4) is: ${fibonacci(4)}');
 
-  Logger.root.level = Level.SEVERE; // skip logs less then severe.
+  Logger.root.level = Level.wtf; // skip logs less then severe.
   print('Fibonacci(5) is: ${fibonacci(5)}');
 
   print('Fibonacci(-42) is: ${fibonacci(-42)}');
@@ -28,10 +28,10 @@ void main() {
 
 int fibonacci(int n) {
   if (n <= 2) {
-    if (n < 0) log.shout('Unexpected negative n: $n');
+    if (n < 0) log.wtf('Unexpected negative n: $n');
     return 1;
   } else {
-    log.info('recursion: n = $n');
+    log.i('recursion: n = $n');
     return fibonacci(n - 2) + fibonacci(n - 1);
   }
 }

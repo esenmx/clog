@@ -1,12 +1,4 @@
-// Copyright (c) 2019, the Dart project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-import 'dart:async';
-import 'dart:collection';
-
-import 'level.dart';
-import 'log_record.dart';
+part of dlog;
 
 /// Whether to allow fine-grain logging and configuration of loggers in a
 /// hierarchy.
@@ -17,10 +9,10 @@ bool hierarchicalLoggingEnabled = false;
 /// Automatically record stack traces for any message of this level or above.
 ///
 /// Because this is expensive, this is off by default.
-Level recordStackTraceAtLevel = Level.OFF;
+Level recordStackTraceAtLevel = Level.off;
 
 /// The default [Level].
-const defaultLevel = Level.INFO;
+const defaultLevel = Level.info;
 
 /// Use a [Logger] to log debug messages.
 ///
@@ -167,8 +159,8 @@ class Logger {
   /// `isLoggable(logLevel)` is true.
   ///
   /// Use this method to create log entries for user-defined levels. To record a
-  /// message at a predefined level (e.g. [Level.INFO], [Level.WARNING], etc)
-  /// you can use their specialized methods instead (e.g. [info], [warning],
+  /// message at a predefined level (e.g. [Level.info], [Level.warn], etc)
+  /// you can use their specialized methods instead (e.g. [info], [w],
   /// etc).
   ///
   /// If [message] is a [Function], it will be lazy evaluated. Additionally, if
@@ -219,61 +211,47 @@ class Logger {
     }
   }
 
-  /// Log message at level [Level.FINEST].
+  /// Log message at level [Level.trace].
   ///
   /// See [log] for information on how non-String [message] arguments are
   /// handled.
-  void finest(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.FINEST, message, error, stackTrace);
+  void t(Object? message, [Object? error, StackTrace? stackTrace]) =>
+      log(Level.trace, message, error, stackTrace);
 
-  /// Log message at level [Level.FINER].
+  /// Log message at level [Level.debug].
   ///
   /// See [log] for information on how non-String [message] arguments are
   /// handled.
-  void finer(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.FINER, message, error, stackTrace);
+  void d(Object? message, [Object? error, StackTrace? stackTrace]) =>
+      log(Level.debug, message, error, stackTrace);
 
-  /// Log message at level [Level.FINE].
+  /// Log message at level [Level.info].
   ///
   /// See [log] for information on how non-String [message] arguments are
   /// handled.
-  void fine(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.FINE, message, error, stackTrace);
+  void i(Object? message, [Object? error, StackTrace? stackTrace]) =>
+      log(Level.info, message, error, stackTrace);
 
-  /// Log message at level [Level.CONFIG].
+  /// Log message at level [Level.warn].
   ///
   /// See [log] for information on how non-String [message] arguments are
   /// handled.
-  void config(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.CONFIG, message, error, stackTrace);
+  void w(Object? message, [Object? error, StackTrace? stackTrace]) =>
+      log(Level.warn, message, error, stackTrace);
 
-  /// Log message at level [Level.INFO].
+  /// Log message at level [Level.error].
   ///
   /// See [log] for information on how non-String [message] arguments are
   /// handled.
-  void info(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.INFO, message, error, stackTrace);
+  void e(Object? message, [Object? error, StackTrace? stackTrace]) =>
+      log(Level.error, message, error, stackTrace);
 
-  /// Log message at level [Level.WARNING].
+  /// Log message at level [Level.wtf].
   ///
   /// See [log] for information on how non-String [message] arguments are
   /// handled.
-  void warning(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.WARNING, message, error, stackTrace);
-
-  /// Log message at level [Level.SEVERE].
-  ///
-  /// See [log] for information on how non-String [message] arguments are
-  /// handled.
-  void severe(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.SEVERE, message, error, stackTrace);
-
-  /// Log message at level [Level.SHOUT].
-  ///
-  /// See [log] for information on how non-String [message] arguments are
-  /// handled.
-  void shout(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      log(Level.SHOUT, message, error, stackTrace);
+  void wtf(Object? message, [Object? error, StackTrace? stackTrace]) =>
+      log(Level.wtf, message, error, stackTrace);
 
   Stream<LogRecord> _getStream() {
     if (hierarchicalLoggingEnabled || parent == null) {
